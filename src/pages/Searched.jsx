@@ -20,14 +20,18 @@ const Searched = () => {
 
   return (
     <Grid>
-      {searchedRecipes.map((item) => (
-        <Card key={item.id}>
-          <Link to={"/recipes/" + recipe.id}>
-            <img src={item.image} alt={item.title} />
-            <h4>{item.title}</h4>
-          </Link>
-        </Card>
-      ))}
+      {searchedRecipes.length === 0 ? (
+        <Text>Searched Recipes not found.</Text>
+      ) : (
+        searchedRecipes.map((item) => (
+          <Card key={item.id}>
+            <Link to={"/recipes/" + item.id}>
+              <img src={item.image} alt={item.title} />
+              <h4>{item.title}</h4>
+            </Link>
+          </Card>
+        ))
+      )}
     </Grid>
   );
 };
@@ -36,6 +40,9 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 3rem;
+`;
+const Text = styled.div`
+  text-align: center;
 `;
 const Card = styled.div`
   img {
